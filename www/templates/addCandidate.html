@@ -1,0 +1,36 @@
+<ion-view view-title="AddCandidate">
+    <ion-content class="container container-custom">
+        
+   <h1 id="addCandidate_title">
+       Add Candidate
+   </h1>
+        <form ng-submit="doLogin()">
+            <div class="list">
+              <label class="item item-input">
+                <span class="input-label">National Number</span>
+                <input type="text" ng-model="candidateData.username">
+              </label>
+
+              <label class="item item-input">
+                <span class="input-label">Name</span>
+                <input type="password" ng-model="loginData.password">
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Date Of Birth</span>
+                <input type="password" ng-model="loginData.password">
+              </label>
+
+              <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="password" ng-model="loginData.password">
+              </label>
+              <label class="item">
+                <button class="button button-block button-positive" type="submit">Add Candidate</button>
+              </label>
+            </div>
+          </form>
+
+
+
+    </ion-content>
+  </ion-view>
