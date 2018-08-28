@@ -55,12 +55,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.login2', {
+      url: '/login2',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/login2.html',
+          controller: 'login2Ctrl'
         }
       }
     })
@@ -87,5 +87,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/addCandidate');
+  $urlRouterProvider.otherwise('/app/login2');
 });
