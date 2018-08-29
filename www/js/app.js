@@ -82,10 +82,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+
+  .state('app.viewCandidate', {
+    url: '/viewCandidate',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/viewCandidate.html',
+        controller: 'ViewCandidateCtrl'
+      }
+    }
+  })
   
   
   
   ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/addCandidate');
+  $urlRouterProvider.otherwise('/app/viewCandidate');
 });
