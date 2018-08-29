@@ -11,5 +11,17 @@ table, th, td {
 }
 th, td {
     padding: 5px;
-    text-align: left;    
+    text-align: left;   
+} 
+.center-content{
+    text-align: center;
+    padding-bottom: 10px;
+}
+.form-error{
+    padding-right:10px;
+    color:red;
+}
+.left-content{
+    text-align: left;
+    padding-bottom: 10px;
 }
