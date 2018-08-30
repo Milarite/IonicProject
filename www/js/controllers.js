@@ -41,19 +41,21 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('login2Ctrl', function($scope) {
+// .controller('login2Ctrl', function($scope) {
  
-})
+// })
 
-.controller('login2Ctrl', function($scope, $stateParams) {
-})
+.controller('login2Ctrl',["$scope","Web3services",'$window' ,function($scope,Web3services,$window) {
+  $scope.loginEmail = function(loginForm,user){
+
+    if(true){
+      $window.location.href = '#/app/addCandidate';
+    }
+
+  }
+ 
+}])
 .controller('AddCandidateCtrl',function($scope){
-
-
-    
-
-})
-.controller('ViewCandidateCtrl',function($scope){
 
 
     

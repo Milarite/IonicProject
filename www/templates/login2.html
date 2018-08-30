@@ -6,7 +6,7 @@
 <span class="input-label animated bounceInLeft" style="color: #fff;">National Number</span>
           <label class="item item-input item-floating-label animated bounceInRight" style="color:#fff">
              
-              <input type="text" style="background: #fff;
+              <input type="text" ng-model="user.NationalNumber"style="background: #fff;
 color: #000;
 margin: 5px;
 box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
@@ -16,7 +16,7 @@ font-size: 16px;" type="text" placeholder="National Number">
    <span class="input-label animated bounceInLeft" style="color:#fff;" >Password</span>
           <label class="item item-input item-floating-label animated bounceInRight" style="color:#fff">
              
-              <input type="password" style="background: #fff;
+              <input type="password"ng-model="Password" style="background: #fff;
 color: #000;
 margin: 5px;
 box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
@@ -27,7 +27,7 @@ font-size: 16px;" type="password" placeholder="Password">
       </ion-list>
 
 <center>
-  <button class="button button-block button-positive" type="submit">Login</button>
+  <button ng-click="loginEmail(loginForm,user)"class="button button-block button-positive" type="submit">Login</button>
 </label>
 </center>
 
