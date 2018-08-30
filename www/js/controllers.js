@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
   }])
 
 
-.controller('login2Ctrl',["$scope","Web3services",'$window' ,function($scope,Web3services,$window) {
+.controller('login2Ctrl',["$scope","Web3jsObj",'$window' ,function($scope,Web3jsObj,$window) {
   $scope.loginEmail = function(loginForm,user){
 
     if(true){
