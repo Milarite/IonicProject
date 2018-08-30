@@ -8,7 +8,7 @@
    <div class="center-content">
        <img style='width:200px; height:100px;'  src='/img/Candidate.jpg'>
    </div>
-        <form name="addForm" ng-submit="doLogin()">
+        <form name="addForm">
             <div class="list">
               <label class="item item-input">
                 <span class="input-label">National Number</span>
@@ -45,7 +45,7 @@
 
               </label>
               <label class="item">
-                <button ng-disabled="addForm.$invalid || addForm.$pending" class="button button-block button-positive" type="submit">Add Candidate</button>
+                <button ng-click="addCandidate(candidateData)" ng-disabled="addForm.$invalid || addForm.$pending" class="button button-block button-positive" type="submit">Add Candidate</button>
               </label>
             </div>
           </form>

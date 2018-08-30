@@ -41,17 +41,36 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('login2Ctrl', function($scope) {
- 
-})
 
-.controller('login2Ctrl', function($scope, $stateParams) {
-})
+
+
+
 .controller('AddCandidateCtrl',['$scope','Web3jsObj',function($scope,Web3jsObj){
 
-    
+    $scope.addCandidate=function(candidateData){
 
-    
+
+
+
+        console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
+
+
+
+
+
+
+    }
+  }])
+
+
+.controller('login2Ctrl',["$scope","Web3jsObj",'$window' ,function($scope,Web3jsObj,$window) {
+  $scope.loginEmail = function(loginForm,user){
+
+    if(true){
+      $window.location.href = '#/app/addCandidate';
+    }
+
+  }
 
 
 

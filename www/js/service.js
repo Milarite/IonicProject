@@ -1,15 +1,33 @@
+var app=angular.module('starter.services',[]);
+app.service("Web3services",function(){
+    this.myFunc = function (x) {
+        return x.toString(16);
+    }
+});
 var app = angular.module('starter.services', []);
 app.service('Web3jsObj',function()
 {
 
+    web3 = null;
     this.Web3Facotry=function(url){
+        
         if(url)
         {
-           return  new Web3(new Web3.providers.HttpProvider(url));
+           web3 =   new Web3(new Web3.providers.HttpProvider(url));
+           
         }
+        else{
       
-           return   new Web3(web3.currentProvider);
+           web3=   new Web3(web3.currentProvider);
+        }
+
+           return web3;
         
+    }
+
+    this.Web3SmartContract=function(address,abi){
+return new  web3.eth.Contract(abi,address);
+
     }
 
     this.test=function(a){
@@ -17,6 +35,8 @@ app.service('Web3jsObj',function()
     }
 
 });
+
+
 // app.service('ContractCommunication', function() {
 //     this.myFunc = function (x) {
 //         return x.toString(16);

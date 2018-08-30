@@ -31,7 +31,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
 
     .state('app', {
     url: '/app',
-    abstract: false,
+    abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
@@ -47,6 +47,14 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
     }
   })
 
+  .state('app.browse', {
+      url: '/browse',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/browse.html'
+        }
+      }
+    })
     .state('app.login2', {
       url: '/login2',
       views: {
@@ -71,16 +79,6 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
       'menuContent': {
         templateUrl: 'templates/addCandidate.html',
         controller: 'AddCandidateCtrl'
-      }
-    }
-  })
-
-  .state('app.viewCandidate', {
-    url: '/viewCandidate',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/viewCandidate.html',
-        controller: 'ViewCandidateCtrl'
       }
     }
   })
