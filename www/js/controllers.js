@@ -49,7 +49,21 @@ angular.module('starter.controllers', [])
 })
 .controller('AddCandidateCtrl',['$scope','Web3jsObj',function($scope,Web3jsObj){
 
-    
+    $scope.addCandidate=function(candidateData){
+
+
+
+
+        console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
+
+
+
+
+
+
+    }
+
+
 
     
 
