@@ -47,13 +47,26 @@ angular.module('starter.controllers', [])
 
 .controller('login2Ctrl', function($scope, $stateParams) {
 })
-.controller('AddCandidateCtrl',function($scope){
+.controller('AddCandidateCtrl',['$scope','Web3jsObj',function($scope,Web3jsObj){
+
+    
+
+    
+
 
 
     
 
-})
+}])
 .controller('ViewCandidateCtrl',function($scope){
+
+    
+    
+  
+
+
+ 
+
 
 
     
