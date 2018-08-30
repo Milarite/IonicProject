@@ -4,7 +4,6 @@ app.service("Web3services",function(){
         return x.toString(16);
     }
 });
-var app = angular.module('starter.services', []);
 app.service('Web3jsObj',function()
 {
 

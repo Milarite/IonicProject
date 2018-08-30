@@ -76,9 +76,10 @@ angular.module('starter.controllers', [])
 
 
 
+
     
 
-}])
+}}])
 .controller('ViewCandidateCtrl',function($scope){
 
     
