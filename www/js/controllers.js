@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$window) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -39,6 +39,9 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+  $scope.logout=function(){
+    $window.location.href('#/app/templates/login2');
+  }
 })
 
 
@@ -63,34 +66,30 @@ angular.module('starter.controllers', [])
   }])
 
 
-.controller('login2Ctrl',["$scope","Web3services",'$window','Web3jsObj' ,function($scope,Web3services,$window,$Web3jsObj) {
+.controller('login2Ctrl',["$scope","Web3jsObj",'$window' ,function($scope,Web3jsObj,$window) {
   $scope.loginEmail = function(loginForm,user){
 
     if(true){
       $window.location.href = '#/app/addCandidate';
       console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
-    //   var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
-    // }
-
+      var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+    }
+  
   }
 
 
 
 
+
     
 
-}}])
+}])
+
 .controller('ViewCandidateCtrl',function($scope){
 
     
     
   
-
-
- 
-
-
-
     
 
 });
