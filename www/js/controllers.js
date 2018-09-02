@@ -1,3 +1,4 @@
+
 angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -52,7 +53,16 @@ angular.module('starter.controllers', [])
 
 
 
-        console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
+        Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+
+
+
+        var judgmentInstance = Web3jsObj.Web3SmartContract("0xbd97c833494c016e167310b3fc6f62f87b79965a",judgmentAbi);
+
+
+        
+
+        
 
 
 
