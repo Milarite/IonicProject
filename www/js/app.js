@@ -73,12 +73,22 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
         controller: 'PlaylistCtrl'
       }
     }
-  }).state('app.addCandidate', {
+  })
+  .state('app.addCandidate', {
     url: '/addCandidate',
     views: {
       'menuContent': {
         templateUrl: 'templates/addCandidate.html',
         controller: 'AddCandidateCtrl'
+      }
+    }
+  })
+  .state('app.ViewCandidate', {
+    url: '/ViewCandidate',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ViewCandidate.html',
+        controller: 'ViewCandidateCtrl'
       }
     }
   })
