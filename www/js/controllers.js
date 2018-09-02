@@ -21,7 +21,7 @@ angular.module('starter.controllers', [])
 
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
-    $scope.modal.hide();
+    $scope.modal.show();
   };
 
   // Open the login modal
@@ -40,7 +40,7 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
   $scope.logout=function(){
-    $window.location.href('#/app/templates/login2');
+    $window.location.href = '#/app/templates/login2';
   }
 })
 
@@ -73,6 +73,7 @@ angular.module('starter.controllers', [])
       $window.location.href = '#/app/addCandidate';
       console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
       var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+      disableBack: true
     }
   
   }
