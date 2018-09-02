@@ -8,6 +8,8 @@ app.service('Web3jsObj',function()
 {
 
     web3 = null;
+    var abi = null;
+    var address = null;
     this.Web3Facotry=function(url){
         
         if(url)
@@ -25,9 +27,18 @@ app.service('Web3jsObj',function()
     }
 
     this.Web3SmartContract=function(address,abi){
-return new  web3.eth.Contract(abi,address);
+
+        if(web3 == null)
+        return null;
+        ///// else return contract instance;
+        const contract =  web3.eth.contract(abi);
+        const instance = contract.at(address);
+        return instance;
+        
 
     }
+
+   // this.getAccountTransaction=function(address)
 
     this.test=function(a){
         console.log(a);

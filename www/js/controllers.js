@@ -1,8 +1,8 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$window) {
-
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$window,$ionicNavBarDelegate) {
+   
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -76,11 +76,16 @@ angular.module('starter.controllers', [])
   }])
 
 
-.controller('login2Ctrl',["$scope","Web3jsObj",'$window' ,function($scope,Web3jsObj,$window) {
+.controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state' ,function($scope,Web3jsObj,$window,$state) {
+
+    
   $scope.loginEmail = function(loginForm,user){
 
     if(true){
-      $window.location.href = '#/app/addCandidate';
+      //$window.location.href = '#/app/addCandidate';
+
+      $state.go('app.addCandidate');
+      this.nav.setRoot('#/app/addCandidate');
       console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
       var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
     }
