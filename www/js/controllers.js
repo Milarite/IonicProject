@@ -1,8 +1,8 @@
 
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$window,$ionicNavBarDelegate) {
-   
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$window,$ionicNavBarDelegate,$state) {
+  
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -41,7 +41,8 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
   $scope.logout=function(){
-    $window.location.href = '#/app/templates/login2';
+   $state.go('app.login2');
+
   }
 })
 
@@ -51,18 +52,48 @@ angular.module('starter.controllers', [])
 
 .controller('AddCandidateCtrl',['$scope','Web3jsObj',function($scope,Web3jsObj){
 
+
+  
+
+// const wallet = Wallet.createRandom();
+
+//     console.log(wallet.address);
+
+        // seedPhrase: seedPhrase, // Optionally provide a 12-word seed phrase
+        // salt: fixture.salt,     // Optionally provide a salt.
+                                   // A unique salt will be generated otherwise.
+        // hdPathString: hdPath    // Optional custom HD Path String
+//     Web3jsObj.web3Init(contractsInfo.main,MainAbi);
+//     Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+    
+// var smartContract = Web3jsObj.Web3SmartContract();
+
+
+
+
     $scope.addCandidate=function(candidateData){
 
+  
 
 
 
-        Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+  
+// var data =smartContract.addCandidate.getData(candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
+//     ,"Amman","2015","0795291901"); 
+    
+
+    // web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress(),function(err,nonce){
+    //     var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce);
+
+    // web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
+    //     console.log(err);
+    //     console.log(transactionHash);
+    //         });
+
+//});
 
 
-
-        var judgmentInstance = Web3jsObj.Web3SmartContract("0xbd97c833494c016e167310b3fc6f62f87b79965a",judgmentAbi);
-
-
+       
         
 
         
@@ -72,23 +103,27 @@ angular.module('starter.controllers', [])
 
 
 
-    }
+   }
   }])
 
 
-.controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state' ,function($scope,Web3jsObj,$window,$state) {
+.controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj' ,function($scope,Web3jsObj,$window,$state,Web3jsObj) {
 
-    
+   
   $scope.loginEmail = function(loginForm,user){
 
     if(true){
-      //$window.location.href = '#/app/addCandidate';
 
+        ethers.Wallet.fromBrainWallet(loginForm.NationalNumber, loginForm.Password).then(function(_wallet){
+
+            console.log("privateKey " + _wallet.privateKey);
+            console.log("public key " + _wallet.address);
+
+            
+        });
       $state.go('app.addCandidate');
-      this.nav.setRoot('#/app/addCandidate');
-      console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
+     // console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
       var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
-      disableBack: true
     }
   
   }
@@ -101,7 +136,13 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('ViewCandidateCtrl',function($scope){
+.controller('ViewCandidateCtrl',function($scope,Web3jsObj){
+
+//     Web3jsObj.web3Init(dsdsd,adsadsd);
+//     Web3jsObj.Web3Facotry();
+//   var s =  Web3jsObj.Web3SmartContract();
+
+
 
     
     
@@ -109,6 +150,5 @@ angular.module('starter.controllers', [])
     
 
 });
-
 
 

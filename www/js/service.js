@@ -10,6 +10,21 @@ app.service('Web3jsObj',function()
     web3 = null;
     var abi = null;
     var address = null;
+    const accountAddress = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
+    const privateKey = "50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275";
+
+    this.web3Init = function (_address,_abi){
+        abi = _abi;
+        address = _address;
+        
+    }
+    this.createWallet=function(_id,_password,callBackFunction){
+        var pk = null;
+        
+
+        
+
+    }
     this.Web3Facotry=function(url){
         
         if(url)
@@ -26,19 +41,54 @@ app.service('Web3jsObj',function()
         
     }
 
-    this.Web3SmartContract=function(address,abi){
+
+
+
+
+    this.Web3SmartContract=function(){
 
         if(web3 == null)
         return null;
         ///// else return contract instance;
         const contract =  web3.eth.contract(abi);
         const instance = contract.at(address);
+
+
+
+
+
+
         return instance;
         
 
     }
 
-   // this.getAccountTransaction=function(address)
+    this.web3GetAccountAddress = function(){
+        return accountAddress;
+    }
+
+
+    this.prepareRawTransaction=function(_data,_nonce){
+        var tx =new ethereumjs.Tx({ 
+            data : _data,
+            nonce : _nonce,
+            gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+            to : address,
+            value : 0,
+            gasLimit: 1000000
+
+        });
+
+          tx.sign(ethereumjs.Buffer.Buffer.from(privateKey, 'hex'));
+          var raw = '0x' + tx.serialize().toString('hex');
+
+          return raw;
+
+    }
+
+        this.getAccounts=function(){
+
+        }
 
     this.test=function(a){
         console.log(a);
