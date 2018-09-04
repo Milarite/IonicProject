@@ -114,14 +114,14 @@ angular.module('starter.controllers', [])
 
     if(true){
 
-        ethers.Wallet.fromBrainWallet(loginForm.NationalNumber, loginForm.Password).then(function(_wallet){
+        ethers.Wallet.fromBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
 
             console.log("privateKey " + _wallet.privateKey);
             console.log("public key " + _wallet.address);
 
-            
+              // $state.go('app.addCandidate');
         });
-      $state.go('app.addCandidate');
+    
      // console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
       var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
       disableBack: true;
