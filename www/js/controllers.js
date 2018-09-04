@@ -123,8 +123,8 @@ $scope.validation = function(_idNumber,_pass){
 }
 
 
-
-if((role.judgment==true && user.password =="judg") || (role.candidate ==true && valdation(user.NationalNumber,user.password)))
+// (role.candidate ==true && valdation(user.NationalNumber,user.password))
+if((role.judgment==true && user.password =="judg") )
 {
 
     if(true){
@@ -136,11 +136,12 @@ if((role.judgment==true && user.password =="judg") || (role.candidate ==true && 
         });
       
      // console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
-      var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+   //   var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
     }
   
   }
 
+}
 
 
 
