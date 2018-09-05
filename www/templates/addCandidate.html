@@ -44,6 +44,28 @@
                 
 
               </label>
+              <label class="item item-input">
+                <span class="input-label">City</span>
+                <input name="city" type="text" ng-model="candidateData.city" required>
+                <span class="form-error" ng-show="addForm.city.$touched && addForm.city.$invalid">this field is required</span>
+                
+
+              </label>
+              <label class="item item-input">
+                <span class="input-label">Year</span>
+                <input name="year" type="password" ng-model="candidateData.year" required>
+                <span class="form-error" ng-show="addForm.year.$touched && addForm.year.$invalid">this field is required</span>
+                
+
+              </label>
+
+              <label class="item item-input">
+                <span class="input-label">Phone Number</span>
+                <input name="phoneNumber" type="password"  ng-model="candidateData.phoneNumber" required>
+                <span class="form-error" ng-show="addForm.phoneNumber.$touched && addForm.phoneNumber.$invalid">this field is required</span>
+                
+
+              </label>
               <label class="item">
                 <button ng-click="addCandidate(candidateData)" ng-disabled="addForm.$invalid || addForm.$pending" class="button button-block button-positive" type="submit">Add Candidate</button>
               </label>

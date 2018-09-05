@@ -78,19 +78,24 @@ angular.module('starter.controllers', [])
 
 
   
-// var data =smartContract.addCandidate.getData(candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
-//     ,"Amman","2015","0795291901"); 
+var data =smartContract.addCandidate.getData(candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
+    ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
     
+ const _address = localStorage.getItem("address")
+Web3jsObj.web3Init(contractsInfo.main,MainAbi);
 
-    // web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress(),function(err,nonce){
-    //     var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce);
 
-    // web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
-    //     console.log(err);
-    //     console.log(transactionHash);
-    //         });
 
-//});
+
+    web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress(),function(err,nonce){
+        var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce);
+
+    web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
+        console.log(err);
+        console.log(transactionHash);
+            });
+
+});
 
 
        
@@ -109,6 +114,12 @@ angular.module('starter.controllers', [])
 
 .controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj' ,function($scope,Web3jsObj,$window,$state,Web3jsObj) {
 
+
+  $scope.check = function(event,_val){
+    if ($scope.checked == event.target.value)
+     $scope.checked = false
+     $scope.role=_val;
+  }  
    
   $scope.loginEmail = function(loginForm,user,role){
 
@@ -123,12 +134,20 @@ $scope.validation = function(_idNumber,_pass){
 }
 
 
-
-if((role.judgment==true && user.password =="judg") || (role.candidate ==true && valdation(user.NationalNumber,user.password)))
+// (role.candidate ==true && valdation(user.NationalNumber,user.password))
+if(($scope.role=="judgment" && user.password =="judgjudg") )
 {
 
-    if(true){
+
+   
+    
         ethers.Wallet.fromBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
+
+            
+            localStorage.setItem("address", _wallet.address);
+            localStorage.setItem("pkAddress",_wallet.privateKey);
+
+
 
     
             $state.go('app.addCandidate');
@@ -141,6 +160,7 @@ if((role.judgment==true && user.password =="judg") || (role.candidate ==true && 
   
   }
 
+}
 
 
 
