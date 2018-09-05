@@ -117,7 +117,7 @@ Web3jsObj.web3Init(contractsInfo.main,MainAbi);
 
   $scope.check = function(event,_val){
     if ($scope.checked == event.target.value)
-     $scope.checked = false
+     $scope.checked = false;
      $scope.role=_val;
   }  
    
@@ -153,7 +153,7 @@ if(($scope.role=="judgment" && user.password =="judgjudg") )
             $state.go('app.addCandidate');
             
         });
-      
+     
      // console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
     //   var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
     }
