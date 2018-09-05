@@ -50,7 +50,7 @@ angular.module('starter.controllers',[])
 
 
 
-.controller('AddCandidateCtrl',['$scope','Web3jsObj',function($scope,Web3jsObj){
+.controller('AddCandidateCtrl',['$scope','Web3jsObj','$ionicLoading',function($scope,Web3jsObj,$ionicLoading){
 
 
   
@@ -73,35 +73,72 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
 
 
 
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey.substring(2));
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
-const c = Web3jsObj.Web3SmartContract();
+const smartContract = Web3jsObj.Web3SmartContract();
 
 
 
     $scope.addCandidate=function(candidateData){
 
-  
+  $ionicLoading.show();
+        //// create candidate wallet
 
-
-
-  
-var data =smartContract.addCandidate.getData(candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
-    ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
-
-
-    web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress(),function(err,nonce){
-        var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce);
-
-    web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
-        console.log(err);
-        console.log(transactionHash);
-            });
-
-});
+        Web3jsObj.createBrainWallet(candidateData.candidateId,candidateData.password).then(function(_wallet)
     
- const _address = localStorage.getItem("address")
+    {
+var raw = Web3jsObj.TransferEther(Web3jsObj.web3GetAccountAddress(),4);
+        web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
+            console.log("send ether to judg");
+            console.log(err);
+console.log(transactionHash);
+            var data =smartContract.addCandidate.getData(_wallet.address,candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
+                ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
+            
+            
+                web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress,function(err,nonce){
+                    var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce,0);
+            
+                web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
+    
+                    if(!err)
+                    {
+                    if(transactionHash)
+                    {
+    
+                        $ionicLoading.hide();
+                        alert("done");
+                    }
+                }
+                else {
+                    console.log(err);
+                }
+                 
+    
+    
+    
+                        });
+         
+
+
+
+        });
+      
+        
+        });
+            
+    });
+
+
+
+
+        /// end of create candidate wallet
+
+
+
+  
+
 
 
 
@@ -157,7 +194,9 @@ $scope.validation = function(_idNumber,_pass){
 {
 
     $ionicLoading.show();
-        ethers.Wallet.fromBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
+
+    
+    Web3jsObj.createBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
 
             
         localStorage.setItem("address", _wallet.address);
