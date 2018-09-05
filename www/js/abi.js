@@ -1,9 +1,9 @@
 
 var contractsInfo  = {
-main : "0x50b7460f8666caa050ee8b2c6c1bc49174ba5065",
-judgment :"0xd33dde1b558d4b362a6e67d9efb6d339b13a9e74",
-voters :"0x834e605e24dcf0f461ce86e9d9cfded72d766e15",
-candidate:"0xf44e1c124615d83efc318656e53b01159881425f"
+main : "0xa4669d8ea625e11bf0249e3af355cd693166503a",
+judgment :"0xf419a1174a4c8196eb041b314aec87d84f3d8536",
+voters :"0x56ca05cbb8f1d0211dc3e7f96e752f245978b139",
+candidate:"0x738c46880bdeeaa342585d218e19c1ba56f07b0e"
 
 }
 
