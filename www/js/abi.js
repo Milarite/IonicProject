@@ -7,6 +7,8 @@ candidate:"0xf44e1c124615d83efc318656e53b01159881425f"
 
 }
 
+const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
+
 var judgmentAbi = [
 	{
 		"constant": false,

@@ -1,5 +1,5 @@
 
-angular.module('starter.controllers', [])
+angular.module('starter.controllers',[])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$window,$ionicNavBarDelegate,$state) {
   
@@ -68,6 +68,15 @@ angular.module('starter.controllers', [])
     
 // var smartContract = Web3jsObj.Web3SmartContract();
 
+const judgment_address = localStorage.getItem("address");
+const judgment_privateKey = localStorage.getItem("pkAddress");
+
+
+
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
+Web3jsObj.Web3Facotry(rinkebyUrl);
+
+const c = Web3jsObj.Web3SmartContract();
 
 
 
@@ -80,11 +89,6 @@ angular.module('starter.controllers', [])
   
 var data =smartContract.addCandidate.getData(candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
     ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
-    
- const _address = localStorage.getItem("address")
-Web3jsObj.web3Init(contractsInfo.main,MainAbi);
-
-
 
 
     web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress(),function(err,nonce){
@@ -96,6 +100,14 @@ Web3jsObj.web3Init(contractsInfo.main,MainAbi);
             });
 
 });
+    
+ const _address = localStorage.getItem("address")
+
+
+
+
+
+  
 
 
        
@@ -112,7 +124,7 @@ Web3jsObj.web3Init(contractsInfo.main,MainAbi);
   }])
 
 
-.controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj' ,function($scope,Web3jsObj,$window,$state,Web3jsObj) {
+.controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj','$ionicLoading' ,function($scope,Web3jsObj,$window,$state,Web3jsObj,$ionicLoading) {
 
 
   $scope.check = function(event,_val){
@@ -135,12 +147,16 @@ $scope.validation = function(_idNumber,_pass){
 
 
 // (role.candidate ==true && valdation(user.NationalNumber,user.password))
-if(($scope.role=="judgment" && user.password =="judgjudg") )
+
+
+// if(($scope.role=="candidate" && validation(user.NationalNumber,user.password)==true))
+// {
+
+// }
+ if(($scope.role=="judgment" && user.password =="judgjudg") )
 {
 
-
-   
-    
+    $ionicLoading.show();
         ethers.Wallet.fromBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
 
             
@@ -151,6 +167,9 @@ if(($scope.role=="judgment" && user.password =="judgjudg") )
 
     
             $state.go('app.addCandidate');
+
+            $ionicLoading.hide();
+
             
         });
      

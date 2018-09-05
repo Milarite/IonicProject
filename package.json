@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "@ionic/pro": "2.0.3",
+    "angular-loading-overlay": "^1.1.1",
     "bip39": "^2.5.0",
     "eth-lightwallet": "^3.0.1",
-    "ethereumjs-tx": "^1.3.7"
+    "ethereumjs-tx": "^1.3.7",
+    "ng-loading-overlay": "^1.2.0"
   }
 }
