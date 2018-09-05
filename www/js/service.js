@@ -6,9 +6,9 @@ app.service("Web3services",function(){
 });
 
 
-app.service("Web3services",function(){
+app.service("Web3jsObj",function(){
 
-    
+
 
 
 
@@ -90,21 +90,29 @@ app.service("Web3services",function(){
 
     }
 
-        this.getAccounts=function(){
-
-        }
-
- 
 
     this.createBrainWallet = function (_userName,_password){
       return  ethers.Wallet.fromBrainWallet(_userName,_password);
     }
 
-    this.TransferEther= function(_toAddress,_value){
+    this.TransferEther= function(_toAddress,_value,_pk){
         var raw = null;
-        web3.eth.getTransactionCount(balanceAddress,function(err,nonce){
-          raw =    this.prepareRawTransaction('',nonce,_value);
 
+        web3.eth.getTransactionCount(balanceAddress,function(err,nonce){
+           debugger;
+            var tx =new ethereumjs.Tx({ 
+                data : '',
+                nonce : nonce,
+                gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+                to : _toAddress,
+                value : _value,
+                gasLimit: 1000000
+    
+            });
+    
+              tx.sign(ethereumjs.Buffer.Buffer.from(_pk, 'hex'));
+              var raw = '0x' + tx.serialize().toString('hex');
+    
        
 
         });

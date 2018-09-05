@@ -88,7 +88,7 @@ const smartContract = Web3jsObj.Web3SmartContract();
         Web3jsObj.createBrainWallet(candidateData.candidateId,candidateData.password).then(function(_wallet)
     
     {
-var raw = Web3jsObj.TransferEther(Web3jsObj.web3GetAccountAddress(),4);
+var raw = Web3jsObj.TransferEther(Web3jsObj.web3GetAccountAddress(),4,"50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275");
         web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
             console.log("send ether to judg");
             console.log(err);
