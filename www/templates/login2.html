@@ -6,28 +6,48 @@
 <span class="input-label animated bounceInLeft" style="color: #fff;">National Number</span>
           <label class="item item-input item-floating-label animated bounceInRight" style="color:#fff">
              
-              <input type="text" ng-model="user.NationalNumber"style="background: #fff;
+              <input type="text" ng-model="user.NationalNumber" required  style="background: #fff;
 color: #000;
 margin: 5px;
 box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
 height: 45px;
-font-size: 16px;" type="text" placeholder="National Number">
+font-size: 16px;" name="NationalNumber" placeholder="National Number">
+
           </label>
+          <p ng-show="loginForm.NationalNumber.$dirty &&  loginForm.NationalNumber.$error.required">* NationalNumber is required</p>
    <span class="input-label animated bounceInLeft" style="color:#fff;" >Password</span>
           <label class="item item-input item-floating-label animated bounceInRight" style="color:#fff">
              
-              <input type="password"ng-model="Password" style="background: #fff;
+              <input type="password" ng-model="user.password" ng-minlength="6" name="password" required style="background: #fff;
 color: #000;
 margin: 5px;
 box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
 height: 45px;
 font-size: 16px;" type="password" placeholder="Password">
-          </label>
+          </label> 
+            
+           <p ng-show="loginForm.password.$dirty && loginForm.password.$error.required">*password is required </p>
+          <p ng-show="loginForm.password.$dirty && loginForm.password.$error.minlength">*Password must be longer than 6 characters </p>
+        
+        
+
 
       </ion-list>
 
+
+      <div class="row" >
+        <div class=" col-md-5">
+          </div>
+          <div class=" col-md-4">
+        <span >Candidate</span>
+      <input type="radio" ng-click=check($event,'candidate') name="candidate" ng-model="checked" value="candidate">
+      <span>Judjment</span>
+      <input type="radio" ng-click=check($event,'judgment') name="judgment" ng-model="checked" value="judgment">
+      </div>
+      </div>
+
 <center>
-  <button ng-click="loginEmail(loginForm,user)"class="button button-block button-positive" type="submit">Login</button>
+  <button ng-click="loginEmail(loginForm,user)" class="button button-block button-positive" ng-disabled="((!loginForm.candidate.$dirty && !loginForm.judgment.$dirty) || loginForm.$invalid)" type="submit">Login</button>
 </label>
 </center>
 
