@@ -107,6 +107,10 @@ app.service('Web3jsObj',function()
         return raw;
     }
 
+
+}
+
+
 });
 
 
