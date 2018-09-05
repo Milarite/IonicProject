@@ -160,7 +160,6 @@ if(($scope.role=="judgment" && user.password =="judgjudg") )
   
   }
 
-}
 
 
 
