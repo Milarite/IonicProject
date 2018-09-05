@@ -10,12 +10,14 @@ app.service('Web3jsObj',function()
     web3 = null;
     var abi = null;
     var address = null;
-    const accountAddress = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
-    const privateKey = "50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275";
+    var accountAddress= null;
+    var privateKey = null;
 
-    this.web3Init = function (_address,_abi){
+    this.web3Init = function (_address,_abi, _accountAddress,_privateKey){
         abi = _abi;
         address = _address;
+        accountAddress = _accountAddress;
+        privateKey = _privateKey;
         
     }
     this.createWallet=function(_id,_password,callBackFunction){

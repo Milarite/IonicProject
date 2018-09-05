@@ -40,14 +40,14 @@ font-size: 16px;" type="password" placeholder="Password">
           </div>
           <div class=" col-md-4">
         <span >Candidate</span>
-      <input type="radio" name="role" ng-model="role.candidate" value="candidate">
+      <input type="radio" ng-click=check($event,'candidate') name="candidate" ng-model="checked" value="candidate">
       <span>Judjment</span>
-      <input type="radio" name="role" ng-model="role.judgment" value="judgment">
+      <input type="radio" ng-click=check($event,'judgment') name="judgment" ng-model="checked" value="judgment">
       </div>
       </div>
 
 <center>
-  <button ng-click="loginEmail(loginForm,user,role)" class="button button-block button-positive" ng-disabled="loginForm.$invalid" type="submit">Login</button>
+  <button ng-click="loginEmail(loginForm,user)" class="button button-block button-positive" ng-disabled="((!loginForm.candidate.$dirty && !loginForm.judgment.$dirty) || loginForm.$invalid)" type="submit">Login</button>
 </label>
 </center>
 
