@@ -20,13 +20,7 @@ app.service('Web3jsObj',function()
         privateKey = _privateKey;
         
     }
-    this.createWallet=function(_id,_password,callBackFunction){
-        var pk = null;
-        
-
-        
-
-    }
+  
     this.Web3Facotry=function(url){
         
         if(url)
