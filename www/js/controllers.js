@@ -144,8 +144,8 @@ if(($scope.role=="judgment" && user.password =="judgjudg") )
         ethers.Wallet.fromBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
 
             
-            localStorage.setItem("address", _wallet.address);
-            localStorage.setItem("pkAddress",_wallet.privateKey);
+        localStorage.setItem("address", _wallet.address);
+        localStorage.setItem("pkAddress",_wallet.privateKey);
 
 
 
