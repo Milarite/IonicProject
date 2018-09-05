@@ -4,7 +4,14 @@ app.service("Web3services",function(){
         return x.toString(16);
     }
 });
-{
+
+
+app.service("Web3services",function(){
+
+    
+
+
+
 
     web3 = null;
     const balanceAddress = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
@@ -87,8 +94,7 @@ app.service("Web3services",function(){
 
         }
 
-    this.test=function(a){
-        console.log(a);
+ 
 
     this.createBrainWallet = function (_userName,_password){
       return  ethers.Wallet.fromBrainWallet(_userName,_password);
@@ -99,7 +105,7 @@ app.service("Web3services",function(){
         web3.eth.getTransactionCount(balanceAddress,function(err,nonce){
           raw =    this.prepareRawTransaction('',nonce,_value);
 
-        
+       
 
         });
 
@@ -107,7 +113,10 @@ app.service("Web3services",function(){
     }
 
 
-}
+
+
+    
+
 
 
 });
