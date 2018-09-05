@@ -98,7 +98,7 @@ app.service('Web3jsObj',function()
     this.TransferEther= function(_toAddress,_value){
         var raw = null;
         web3.eth.getTransactionCount(balanceAddress,function(err,nonce){
-          raw =    this.prepareRawTransaction(null,nonce,_value);
+          raw =    this.prepareRawTransaction('',nonce,_value);
 
         
 
@@ -106,7 +106,7 @@ app.service('Web3jsObj',function()
 
         return raw;
     }
-
+    }
 });
 
 
