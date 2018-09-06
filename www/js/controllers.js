@@ -62,29 +62,26 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
 
 
 
-//  web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
+ web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
 
-//              var tx =new ethereumjs.Tx({ 
-//             data : '',
-//             nonce : nonce,
-//             gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
-//             to : judgment_address,
-//             value : 6000000000000000000,
-//             gasLimit: 1000000
+             var tx =new ethereumjs.Tx({ 
+            data : '',
+            nonce : nonce,
+            gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+            to : judgment_address,
+            value : 6000000000000000000,
+            gasLimit: 1000000
             
 
-//         });
+        });
 
-//           tx.sign(ethereumjs.Buffer.Buffer.from("50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275", 'hex'));
-//           var raw = '0x' + tx.serialize().toString('hex');
+          tx.sign(ethereumjs.Buffer.Buffer.from("50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275", 'hex'));
+          var raw = '0x' + tx.serialize().toString('hex');
 
 
-//           web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
+          web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
     
-//             if(!err)
-//             {
-//             if(transactionHash)
-//             {
+          
 
 
 
@@ -118,7 +115,6 @@ const smartContract = Web3jsObj.Web3SmartContract();
         Web3jsObj.createBrainWallet(candidateData.candidateId,candidateData.password).then(function(_wallet)
     
     {
-        console.log(_wallet.address);
 
 
                ///// add candidate function
@@ -152,6 +148,8 @@ if(!err)
     console.log(transactionHash);
     alert("candidate added");
 }
+
+
                       });
 
 
@@ -166,14 +164,29 @@ if(!err)
 
 
             })
+      
         }
+
+        })
+
+
+    })
+    
+    
+    
+
+
+
+
+
+
 
 
     
 
 
      
-        
+    
     
        
         
