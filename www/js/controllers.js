@@ -62,7 +62,7 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
 Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey.substring(2));
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
-    web3.eth.getTransaction("0x30ce3f2e640ba554c18a74c507835f4541c23ec2c517908d71a09ced286c7141",function(err,result)
+    web3.eth.getTransaction("0x7678a5567cfac35f728228743ba4e28048552043",function(err,result)
 
 {
     console.log(err);
