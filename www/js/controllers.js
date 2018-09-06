@@ -93,12 +93,13 @@ const smartContract = Web3jsObj.Web3SmartContract();
     {
 
         var data =smartContract.sendEther.getData(judgment_address,4); 
-        web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
+        web3.eth.getTransactionCount("0x5316db91c494fc5641bcb0a62f826ab077a6f119",function(err,nonce){
 
           var rawTransaction =   Web3jsObj.prepareRawTransaction(data,nonce,0);
 
 
           web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
+              console.log(err);
          console.log(transactionHash);
           });
 
