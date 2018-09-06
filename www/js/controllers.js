@@ -193,11 +193,25 @@ $scope.validation = function(_idNumber,_pass){
 //     Web3jsObj.Web3Facotry();
 //   var s =  Web3jsObj.Web3SmartContract();
 
+const judgment_address = localStorage.getItem("address");
+const judgment_privateKey = localStorage.getItem("pkAddress");
+
+
+
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
+Web3jsObj.Web3Facotry(rinkebyUrl);
+
+
+$scope.items =   [
+  { nameCandidate: "yaqeen", CandidateID: "123", City  : "Zarqa",NumberOfVotes : "10" },
+  {  nameCandidate: "yaqeen", CandidateID: "123", City  : "Amman", NumberOfVotes: "15"},
+  {  nameCandidate: "yaqeen", CandidateID: "123", City : "Irbid", NumberOfVotes: "20" },
+  {  nameCandidate: "yaqeen", CandidateID: "123", City : "Amman", NumberOfVotes: "25" }
+ ];
+
 
 
     
-    
-  
     
 
 });
