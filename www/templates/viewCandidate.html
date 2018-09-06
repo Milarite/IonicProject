@@ -1,18 +1,40 @@
 <ion-view   view-title="View Candidate">
         <ion-content   class="container container-custom">
 <h2>All Candidate</h2>
-<table class="table table-striped" style="width:100%">
 
+<table class="table table-striped" style="width:100%">
+   
   <tr>
-    <th> Candidate Name </th>
-    <th >City</th>
-    <th>Number Of Votes</th>
+     <th> Candidate Name </th>
+  <!--  <th >Candidate Id</th> -->
+    <th>City</th>
+    <th>Number of Votes</th>
   </tr>
+  <tbody ng-repeat ="x in candidates">
+  <tr>
+    <td>  {{x.nameCandidate}} </td>
+    
+    
+<!-- <td> {{x.CandidateID}}</td> -->
+<td>
+   {{x.City}}
+  </td>
+  <td>
+      {{x.NumberOfVotes}}
  
-      
+    </td>
+  </tr>
+  <tr>
+   
+   
+</tbody>
+
+    
+   
 
 </table>
 
 <div ng-include="'shared/footer.html'"></div>
+
 </ion-content>
 </ion-view>
