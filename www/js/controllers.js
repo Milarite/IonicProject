@@ -58,7 +58,8 @@ const judgment_address = localStorage.getItem("address");
 const judgment_privateKey = localStorage.getItem("pkAddress");
 
 
-
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,"0x63a9adabb3edc39f552249cc0dc23eeab0df3c72","50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275");
+Web3jsObj.Web3Facotry(rinkebyUrl);
 
 
 
@@ -79,7 +80,7 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
           var raw = '0x' + tx.serialize().toString('hex');
 
 
-        //  web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
+          web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
     
           
 
@@ -100,8 +101,7 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
     
  
     
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,"0x63a9adabb3edc39f552249cc0dc23eeab0df3c72","50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275");
-Web3jsObj.Web3Facotry(rinkebyUrl);
+
 
 const smartContract = Web3jsObj.Web3SmartContract();
 
@@ -167,7 +167,7 @@ if(!err)
       
         }
 
-       // })
+        })
 
 
     })
