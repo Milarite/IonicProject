@@ -50,7 +50,7 @@ angular.module('starter.controllers',[])
 
 
 
-.controller('AddCandidateCtrl',['$scope','Web3jsObj','$ionicLoading',function($scope,Web3jsObj,$ionicLoading){
+.controller('AddCandidateCtrl',['$scope','Web3jsObj','$ionicLoading','$timeout',function($scope,Web3jsObj,$ionicLoading,$timeout){
 
 
 
@@ -59,37 +59,51 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
 
 
 
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey.substring(2));
-Web3jsObj.Web3Facotry(rinkebyUrl);
 
-    web3.eth.getTransaction("0x7678a5567cfac35f728228743ba4e28048552043",function(err,result)
 
-{
-    console.log(err);
-    console.log(result);
-});
+/*
+ // web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
+
+        //      var tx =new ethereumjs.Tx({ 
+        //     data : '',
+        //     nonce : nonce,
+        //     gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+        //     to : judgment_address,
+        //     value : 6000000000000000000,
+        //     gasLimit: 1000000
+            
+
+        // });
+
+        //   tx.sign(ethereumjs.Buffer.Buffer.from("50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275", 'hex'));
+        //   var raw = '0x' + tx.serialize().toString('hex');
+
+
+        //   web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
+    
+        //     if(!err)
+        //     {
+        //     if(transactionHash)
+        //     {
+
+*/
+
+
+
+
+
+
+
 
 
   
 
-// const wallet = Wallet.createRandom();
 
-//     console.log(wallet.address);
 
-        // seedPhrase: seedPhrase, // Optionally provide a 12-word seed phrase
-        // salt: fixture.salt,     // Optionally provide a salt.
-                                   // A unique salt will be generated otherwise.
-        // hdPathString: hdPath    // Optional custom HD Path String
-//     Web3jsObj.web3Init(contractsInfo.main,MainAbi);
-//     Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
     
-// var smartContract = Web3jsObj.Web3SmartContract();
-
-
-
-/*
-
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey.substring(2));
+ 
+    
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,"0x63a9adabb3edc39f552249cc0dc23eeab0df3c72","50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275");
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
 const smartContract = Web3jsObj.Web3SmartContract();
@@ -99,122 +113,78 @@ const smartContract = Web3jsObj.Web3SmartContract();
     $scope.addCandidate=function(candidateData){
 
   $ionicLoading.show();
-        //// create candidate wallet
+        // create candidate wallet
 
         Web3jsObj.createBrainWallet(candidateData.candidateId,candidateData.password).then(function(_wallet)
     
     {
+        console.log(_wallet.address);
 
 
-        /////////////////////
+               ///// add candidate function
 
-        web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
-            console.log("nonce");
-            console.log(nonce);
-            var tx =new ethereumjs.Tx({ 
-                data : '',
-                nonce : nonce+5,
-                gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
-                to : judgment_address,
-                value : 0,
-                gasLimit: 1000000
-                
-                
-    
-            });
+               var data =smartContract.addCandidate.getData(_wallet.address,candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
+                ,candidateData.city,candidateData.year,candidateData.phoneNumber,"plz plz endome elena drobs mlabs swf n7rr el ods"); 
             
- 
-              tx.sign(ethereumjs.Buffer.Buffer.from("50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275",'hex'));
-              const serializedTx = tx.serialize();
-              raw =  "0x" + serializedTx.toString('hex');
-    
-       
+            
+                web3.eth.getTransactionCount(judgment_address,function(err,nonce){
+                  
+                    var tx =new ethereumjs.Tx({ 
+                        data : data,
+                        nonce : nonce,
+                        gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+                        to : contractsInfo.main,
+                        value : 0,
+                        gasLimit: 1000000
+                        
+            
+                    });
+            
+                      tx.sign(ethereumjs.Buffer.Buffer.from(judgment_privateKey.substr(2), 'hex'));
+                      var raw = '0x' + tx.serialize().toString('hex');
+            
+            
+                      web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
 
+if(!err)
+{
+    $ionicLoading.hide();
+    console.log(transactionHash);
+    alert("candidate added");
+}
+                      });
+
+
+                    
+
+
+
+                });
+
+
+
+
+
+            })
+        }
+
+
+    
+
+
+     
         
-
-        ////////////////////
-
-
-        web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
-            if(err)
-            {
-                console.log("err");
-                console.log(err);
-                return ;
-            }
-
-            console.log("hash");
-            console.log("transactionHash");
-            console.log(transactionHash);
-         
-            // var data =smartContract.addCandidate.getData(_wallet.address,candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
-            //     ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
-            
-            
-            //     web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress,function(err,nonce){
-            //         var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce,0);
-            
-            //     web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
     
-            //         if(!err)
-            //         {
-            //         if(transactionHash)
-            //         {
-    
-            //             $ionicLoading.hide();
-            //             alert("done");
-            //         }
-            //     }
-            //     else {
-            //         console.log(err);
-            //     }
-                 
-    
-    
-    
-            //             });
-         
-            //         });
-
-
-        });
-      
-        
-        });
-            
-    
-
-
-
-
-        /// end of create candidate wallet
-
-
-
-  
-
-
-
-
-
-
-  
-
-
        
         
 
-        
 
 
 
+        ///////////////////
 
+  
 
-
-   })
-
-    }
-*/
 
 
   }])

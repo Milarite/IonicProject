@@ -1,6 +1,6 @@
 
 var contractsInfo  = {
-main : "0x8aab4062c224236363694aa96bc18c67abb57f0d",
+main : "0xec6418fe2b9fe4cceb118ffffab4d9429e754cc5",
 judgment :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
 voters :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
 candidate:"0xafbcd3e0c5e7827537290c81917dfafb3c889e50"
