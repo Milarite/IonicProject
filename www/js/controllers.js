@@ -79,7 +79,7 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
           var raw = '0x' + tx.serialize().toString('hex');
 
 
-          web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
+        //  web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
     
           
 
@@ -167,7 +167,7 @@ if(!err)
       
         }
 
-        })
+       // })
 
 
     })
