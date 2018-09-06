@@ -103,7 +103,7 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
     
  
     
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,"0x63a9adabb3edc39f552249cc0dc23eeab0df3c72","50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275");
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
 const smartContract = Web3jsObj.Web3SmartContract();
@@ -151,6 +151,9 @@ if(!err)
     $ionicLoading.hide();
     console.log(transactionHash);
     alert("candidate added");
+}
+else{
+  console.log(err);
 }
                       });
 
