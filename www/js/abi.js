@@ -1,11 +1,4 @@
 
-var contractsInfo  = {
-main : "0xec6418fe2b9fe4cceb118ffffab4d9429e754cc5",
-judgment :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
-voters :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
-candidate:"0xafbcd3e0c5e7827537290c81917dfafb3c889e50"
-
-}
 
 const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
 
