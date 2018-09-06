@@ -4,10 +4,18 @@ app.service("Web3services",function(){
         return x.toString(16);
     }
 });
-app.service('Web3jsObj',function()
-{
+
+
+app.service("Web3jsObj",function(){
+
+
+
+
+
 
     web3 = null;
+    
+    const balancePkAddress = "50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275";
     var abi = null;
     var address = null;
     var accountAddress= null;
@@ -64,13 +72,13 @@ app.service('Web3jsObj',function()
     }
 
 
-    this.prepareRawTransaction=function(_data,_nonce){
+    this.prepareRawTransaction=function(_data,_nonce,_value){
         var tx =new ethereumjs.Tx({ 
             data : _data,
             nonce : _nonce,
             gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
             to : address,
-            value : 0,
+            value : _value,
             gasLimit: 1000000
 
         });
@@ -82,13 +90,25 @@ app.service('Web3jsObj',function()
 
     }
 
-        this.getAccounts=function(){
 
-        }
-
-    this.test=function(a){
-        console.log(a);
+    this.createBrainWallet = function (_userName,_password){
+      return  ethers.Wallet.fromBrainWallet(_userName,_password);
     }
+
+    this.TransferEther= function(_toAddress,_value,_pk){
+        var raw = null;
+        var balanceAddress = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
+    
+        
+        return raw;
+    }
+
+
+
+
+    
+
+
 
 });
 
