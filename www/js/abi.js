@@ -1,9 +1,10 @@
 
 var contractsInfo  = {
-main : "0xbb5143eeac7520b3f1114d487a3f3fe136db5b98",
+main : "0x8aab4062c224236363694aa96bc18c67abb57f0d",
 judgment :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
 voters :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
 candidate:"0xafbcd3e0c5e7827537290c81917dfafb3c889e50"
+
 }
 
 const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
@@ -565,15 +566,6 @@ var MainAbi =[
 		"type": "function"
 	}
 ]
-
-
-
-
-
-
-
-
-
 
 
 
