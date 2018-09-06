@@ -59,6 +59,12 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
 
 
 
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,"0x9c5209811618f6c0622b4aad5b109603a452bc0a","19F2ED7F3ED053A592E6C7379C7D707D58FC3AECE2C5B07275C27EFA2B33D81A");
+Web3jsObj.Web3Facotry(rinkebyUrl);
+
+const smartContract = Web3jsObj.Web3SmartContract();
+
+
 
 
 
@@ -150,7 +156,7 @@ if(!err)
 }
 
 
-                      });
+            });
 
 
                     
@@ -287,12 +293,23 @@ var smartInstance = Web3jsObj.Web3SmartContract();
 const numberOfCandidate = smartInstance.getCandidateNationalIDArrayLength.call();
 
 const number = numberOfCandidate.c[0];
-
+var items = [];
 for(var i =0 ; i < number ;i++)
 {
   var address = smartInstance.getCandidateNationalID.call(i);
-  console.log(address);
+  console.log(address)
+  var name = smartInstance.getCandidateName.call(address);
+  var city = smartInstance.getCandidateCity.call(address);
+  var numberOfVotes = smartInstance.getCandidateVotesNumber.call(address);
+
+  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes };
+
+  items.push(candidate);
+  //var 
+
+  
 }
+$scope.candidates = items;
 
 //smartInstance.$ionicLoading
 
