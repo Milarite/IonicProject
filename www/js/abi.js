@@ -1,10 +1,9 @@
 
 var contractsInfo  = {
-main : "0xa4669d8ea625e11bf0249e3af355cd693166503a",
-judgment :"0xf419a1174a4c8196eb041b314aec87d84f3d8536",
-voters :"0x56ca05cbb8f1d0211dc3e7f96e752f245978b139",
-candidate:"0x738c46880bdeeaa342585d218e19c1ba56f07b0e"
-
+main : "0xbb5143eeac7520b3f1114d487a3f3fe136db5b98",
+judgment :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
+voters :"0x8d1059b2554ad3ab9969d91b51181d5d52704e2b",
+candidate:"0xafbcd3e0c5e7827537290c81917dfafb3c889e50"
 }
 
 const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
