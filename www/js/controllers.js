@@ -269,13 +269,33 @@ const judgment_privateKey = localStorage.getItem("pkAddress");
 Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
+var smartInstance = Web3jsObj.Web3SmartContract();
 
-$scope.items =   [
-  { nameCandidate: "yaqeen", CandidateID: "123", City  : "Zarqa",NumberOfVotes : "10" },
-  {  nameCandidate: "yaqeen", CandidateID: "123", City  : "Amman", NumberOfVotes: "15"},
-  {  nameCandidate: "yaqeen", CandidateID: "123", City : "Irbid", NumberOfVotes: "20" },
-  {  nameCandidate: "yaqeen", CandidateID: "123", City : "Amman", NumberOfVotes: "25" }
- ];
+const numberOfCandidate = smartInstance.getCandidateNationalIDArrayLength.call();
+
+const number = numberOfCandidate.c[0];
+
+for(var i =0 ; i < number ;i++)
+{
+  var address = smartInstance.getCandidateNationalID.call(i);
+  console.log(address);
+}
+
+//smartInstance.$ionicLoading
+
+
+
+
+
+
+
+
+// $scope.items =   [
+//   { nameCandidate: "yaqeen", CandidateID: "123", City  : "Zarqa",NumberOfVotes : "10" },
+//   {  nameCandidate: "yaqeen", CandidateID: "123", City  : "Amman", NumberOfVotes: "15"},
+//   {  nameCandidate: "yaqeen", CandidateID: "123", City : "Irbid", NumberOfVotes: "20" },
+//   {  nameCandidate: "yaqeen", CandidateID: "123", City : "Amman", NumberOfVotes: "25" }
+//  ];
 
 
 
