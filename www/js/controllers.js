@@ -53,6 +53,23 @@ angular.module('starter.controllers',[])
 .controller('AddCandidateCtrl',['$scope','Web3jsObj','$ionicLoading',function($scope,Web3jsObj,$ionicLoading){
 
 
+
+const judgment_address = localStorage.getItem("address");
+const judgment_privateKey = localStorage.getItem("pkAddress");
+
+
+
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey.substring(2));
+Web3jsObj.Web3Facotry(rinkebyUrl);
+
+    web3.eth.getTransaction("0x30ce3f2e640ba554c18a74c507835f4541c23ec2c517908d71a09ced286c7141",function(err,result)
+
+{
+    console.log(err);
+    console.log(result);
+});
+
+
   
 
 // const wallet = Wallet.createRandom();
@@ -68,10 +85,9 @@ angular.module('starter.controllers',[])
     
 // var smartContract = Web3jsObj.Web3SmartContract();
 
-const judgment_address = localStorage.getItem("address");
-const judgment_privateKey = localStorage.getItem("pkAddress");
 
 
+/*
 
 Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey.substring(2));
 Web3jsObj.Web3Facotry(rinkebyUrl);
@@ -88,39 +104,77 @@ const smartContract = Web3jsObj.Web3SmartContract();
         Web3jsObj.createBrainWallet(candidateData.candidateId,candidateData.password).then(function(_wallet)
     
     {
-var raw = Web3jsObj.TransferEther(Web3jsObj.web3GetAccountAddress(),4,"50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275");
+
+
+        /////////////////////
+
+        web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
+            console.log("nonce");
+            console.log(nonce);
+            var tx =new ethereumjs.Tx({ 
+                data : '',
+                nonce : nonce+5,
+                gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+                to : judgment_address,
+                value : 0,
+                gasLimit: 1000000
+                
+                
+    
+            });
+            
+ 
+              tx.sign(ethereumjs.Buffer.Buffer.from("50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275",'hex'));
+              const serializedTx = tx.serialize();
+              raw =  "0x" + serializedTx.toString('hex');
+    
+       
+
+        
+
+        ////////////////////
+
+
         web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
-            console.log("send ether to judg");
-            console.log(err);
-console.log(transactionHash);
-            var data =smartContract.addCandidate.getData(_wallet.address,candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
-                ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
+            if(err)
+            {
+                console.log("err");
+                console.log(err);
+                return ;
+            }
+
+            console.log("hash");
+            console.log("transactionHash");
+            console.log(transactionHash);
+         
+            // var data =smartContract.addCandidate.getData(_wallet.address,candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
+            //     ,candidateData.city,candidateData.year,candidateData.phoneNumber); 
             
             
-                web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress,function(err,nonce){
-                    var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce,0);
+            //     web3.eth.getTransactionCount(Web3jsObj.web3GetAccountAddress,function(err,nonce){
+            //         var rawTransaction = Web3jsObj.prepareRawTransaction(data,nonce,0);
             
-                web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
+            //     web3.eth.sendRawTransaction(rawTransaction, function (err, transactionHash) {
     
-                    if(!err)
-                    {
-                    if(transactionHash)
-                    {
+            //         if(!err)
+            //         {
+            //         if(transactionHash)
+            //         {
     
-                        $ionicLoading.hide();
-                        alert("done");
-                    }
-                }
-                else {
-                    console.log(err);
-                }
+            //             $ionicLoading.hide();
+            //             alert("done");
+            //         }
+            //     }
+            //     else {
+            //         console.log(err);
+            //     }
                  
     
     
     
-                        });
+            //             });
          
-
+            //         });
 
 
         });
@@ -128,7 +182,7 @@ console.log(transactionHash);
         
         });
             
-    });
+    
 
 
 
@@ -157,7 +211,12 @@ console.log(transactionHash);
 
 
 
-   }
+   })
+
+    }
+*/
+
+
   }])
 
 

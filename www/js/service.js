@@ -14,7 +14,7 @@ app.service("Web3jsObj",function(){
 
 
     web3 = null;
-    const balanceAddress = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
+    
     const balancePkAddress = "50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275";
     var abi = null;
     var address = null;
@@ -97,26 +97,9 @@ app.service("Web3jsObj",function(){
 
     this.TransferEther= function(_toAddress,_value,_pk){
         var raw = null;
-
-        web3.eth.getTransactionCount(balanceAddress,function(err,nonce){
-           debugger;
-            var tx =new ethereumjs.Tx({ 
-                data : '',
-                nonce : nonce,
-                gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
-                to : _toAddress,
-                value : _value,
-                gasLimit: 1000000
+        var balanceAddress = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
     
-            });
-    
-              tx.sign(ethereumjs.Buffer.Buffer.from(_pk, 'hex'));
-              var raw = '0x' + tx.serialize().toString('hex');
-    
-       
-
-        });
-
+        
         return raw;
     }
 
