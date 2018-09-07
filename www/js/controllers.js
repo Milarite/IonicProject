@@ -56,10 +56,12 @@ angular.module('starter.controllers',[])
 
 const judgment_address = localStorage.getItem("address");
 const judgment_privateKey = localStorage.getItem("pkAddress");
+const from_pk = "19F2ED7F3ED053A592E6C7379C7D707D58FC3AECE2C5B07275C27EFA2B33D81A";
+const from_puk = "0x9c5209811618f6c0622b4aad5b109603a452bc0a";
 
 
 
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,"0x9c5209811618f6c0622b4aad5b109603a452bc0a","19F2ED7F3ED053A592E6C7379C7D707D58FC3AECE2C5B07275C27EFA2B33D81A");
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,from_puk,from_pk);
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
 const smartContract = Web3jsObj.Web3SmartContract();
@@ -68,11 +70,11 @@ const smartContract = Web3jsObj.Web3SmartContract();
 
 
 
- web3.eth.getTransactionCount("0x63a9adabb3edc39f552249cc0dc23eeab0df3c72",function(err,nonce){
+ web3.eth.getTransactionCount(from_puk,function(err,transactionCount){
 
              var tx =new ethereumjs.Tx({ 
             data : '',
-            nonce : nonce,
+            nonce : transactionCount,
             gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
             to : judgment_address,
             value : 6000000000000000000,
@@ -81,11 +83,11 @@ const smartContract = Web3jsObj.Web3SmartContract();
 
         });
 
-          tx.sign(ethereumjs.Buffer.Buffer.from("50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275", 'hex'));
+          tx.sign(ethereumjs.Buffer.Buffer.from(from_pk, 'hex'));
           var raw = '0x' + tx.serialize().toString('hex');
 
 
-          web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
+        //  web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
     
           
 
@@ -148,10 +150,13 @@ const smartContract = Web3jsObj.Web3SmartContract();
 
 if(!err)
 {
-    $ionicLoading.hide();
+    
     console.log(transactionHash);
     alert("candidate added");
 }
+console.log(err);
+
+$ionicLoading.hide();
 
 
             });
@@ -171,7 +176,7 @@ if(!err)
       
         }
 
-        })
+        //})
 
 
     })
@@ -300,7 +305,7 @@ for(var i =0 ; i < number ;i++)
   var city = smartInstance.getCandidateCity.call(address);
   var numberOfVotes = smartInstance.getCandidateVotesNumber.call(address);
 
-  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes };
+  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes , address:address };
 
   items.push(candidate);
   //var 
