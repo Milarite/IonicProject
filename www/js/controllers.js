@@ -197,14 +197,14 @@ $ionicLoading.hide();
 
 
 .controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj','$ionicLoading' ,function($scope,Web3jsObj,$window,$state,Web3jsObj,$ionicLoading) {
-
+    Web3jsObj.Web3Facotry(rinkebyUrl);
     $scope.addEtherToJudgment = function(_from,_fromPk,_to){
-        Web3jsObj.Web3Facotry(rinkebyUrl);
+        
         var balance = web3.eth.getBalance(_to);
         balance = web3.toDecimal(balance);
         balance = web3.fromWei(balance, 'ether');
       
-        if(balance > 1)
+        if(balance < 1)
        { 
         web3.eth.getTransactionCount(_from,function(err,transactionCount){
 
@@ -248,18 +248,25 @@ $ionicLoading.hide();
      $scope.checked = false;
      $scope.role=_val;
   }  
-   
+  $scope.validation = function(_idNumber,_pass){
+
+    const candidate_address = web3.
+    
+        Web3jsObj.web3Init(contractsInfo.candidate,CandidateAbi,null,null);
+        var candidateContractInstance = Web3jsObj.Web3SmartContract();
+    
+        const candidate_address = candidateContractInstance.getCandidateAddressByNationalId.call(_idNumber);
+    
+        alert(candidate_address);
+    
+    
+    
+    
+    }
   $scope.loginEmail = function(loginForm,user,role){
 
 
-$scope.validation = function(_idNumber,_pass){
 
-
-
-
-
-
-}
 
 
 // (role.candidate ==true && valdation(user.NationalNumber,user.password))
@@ -269,7 +276,7 @@ $scope.validation = function(_idNumber,_pass){
 // {
 
 // }
- if(($scope.role=="judgment" && user.password =="judgjudg") )
+ if(($scope.role=="judgment" && user.password =="judgjudg"))
 {
 
     $ionicLoading.show();
@@ -302,6 +309,11 @@ $scope.validation = function(_idNumber,_pass){
      
      // console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
     //   var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
+    }
+    else  {
+
+        alert($scope.validation(user.NationalNumber));
+        
     }
   
   }
