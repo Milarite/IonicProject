@@ -2,14 +2,17 @@
 const private_key = "50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275";
 const public_key = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
 var contractsInfo  = {
-    main : "0x1d722826dee4c640d7b361594eb70f18cc742036",
-    judgment :"0xc095edc14f7e58aa0a49f255359ef1a24fc2f2dd",
-    voters :"0xcca61823d7b66d0096d8432e02c5a991cd71c149",
-    candidate:"0x74341908471306dd1fc5337fa1a2334154ebb89a"
+    main : "0xecc2a0d3d3c9507567a8e8927c2abdb7fd219df2",
+    judgment :"0x00a3178b926c65e9154d0ab66c67a2d23fe06799",
+    voters :"0xa1fd853a254eb62eee0cf56febe2eb29806a1876",
+    candidate:"0x69336d5f32cf4d92eed2c7860d530f12f1eba197"
     
     }
     
 const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
+
+
+
 
 var judgmentAbi =[
 	{
@@ -66,6 +69,15 @@ var judgmentAbi =[
 		"type": "function"
 	}
 ]
+
+
+
+
+
+
+
+
+
 var MainAbi =[
 	{
 		"constant": false,
@@ -213,6 +225,24 @@ var MainAbi =[
 		"constant": false,
 		"inputs": [
 			{
+				"name": "_voterAddress",
+				"type": "address"
+			},
+			{
+				"name": "_candidateAddress",
+				"type": "address"
+			}
+		],
+		"name": "revokeMyVote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
 				"name": "_address",
 				"type": "address"
 			},
@@ -225,24 +255,6 @@ var MainAbi =[
 		"outputs": [],
 		"payable": true,
 		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "voterAddress",
-				"type": "address"
-			},
-			{
-				"name": "CandidateAddress",
-				"type": "address"
-			}
-		],
-		"name": "Voting",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -263,6 +275,48 @@ var MainAbi =[
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "CandidateCheckIdAndPassword",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "nationalId",
+				"type": "string"
+			}
+		],
+		"name": "getCandidateAddressByNationalId",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"constant": true,
@@ -566,118 +620,39 @@ var MainAbi =[
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "voterAddress",
+				"type": "address"
+			},
+			{
+				"name": "CandidateAddress",
+				"type": "address"
+			}
+		],
+		"name": "Voting",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
 
 
 
+
+
+
 var CandidateAbi=[
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			},
-			{
-				"name": "candidateIdNumber",
-				"type": "string"
-			},
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "birthOfDate",
-				"type": "string"
-			},
-			{
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "addCandidate",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			},
-			{
-				"name": "candidateIdNumber",
-				"type": "string"
-			},
-			{
-				"name": "city",
-				"type": "string"
-			},
-			{
-				"name": "year",
-				"type": "string"
-			},
-			{
-				"name": "phoneNumber",
-				"type": "string"
-			},
-			{
-				"name": "campaign",
-				"type": "string"
-			}
-		],
-		"name": "addCandidateDetails",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			},
-			{
-				"name": "numberOfVotes",
-				"type": "uint256"
-			}
-		],
-		"name": "addCandidateTracking",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			},
-			{
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "checkIdAndPassword",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -685,45 +660,7 @@ var CandidateAbi=[
 				"type": "address"
 			}
 		],
-		"name": "getCandidatebirthOfDate",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			}
-		],
-		"name": "getCandidateCampaign",
-		"outputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			}
-		],
-		"name": "getCandidateCity",
+		"name": "getCandidatePhonenumber",
 		"outputs": [
 			{
 				"name": "",
@@ -780,7 +717,7 @@ var CandidateAbi=[
 				"type": "address"
 			}
 		],
-		"name": "getCandidatePassword",
+		"name": "getCandidateCampaign",
 		"outputs": [
 			{
 				"name": "",
@@ -795,34 +732,15 @@ var CandidateAbi=[
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_address",
-				"type": "address"
-			}
-		],
-		"name": "getCandidatePhonenumber",
-		"outputs": [
-			{
-				"name": "",
+				"name": "nationalId",
 				"type": "string"
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
-			}
-		],
-		"name": "getCandidateVotesNumber",
+		"name": "getCandidateAddressByNationalId",
 		"outputs": [
 			{
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -869,6 +787,77 @@ var CandidateAbi=[
 	},
 	{
 		"constant": true,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "getCandidatebirthOfDate",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "candidateIdNumber",
+				"type": "string"
+			},
+			{
+				"name": "city",
+				"type": "string"
+			},
+			{
+				"name": "year",
+				"type": "string"
+			},
+			{
+				"name": "phoneNumber",
+				"type": "string"
+			},
+			{
+				"name": "campaign",
+				"type": "string"
+			}
+		],
+		"name": "addCandidateDetails",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "numberOfVotes",
+				"type": "uint256"
+			}
+		],
+		"name": "addCandidateTracking",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
 		"inputs": [],
 		"name": "getNationalIDArrayLength",
 		"outputs": [
@@ -880,9 +869,142 @@ var CandidateAbi=[
 		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "getCandidateCity",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "candidateIdNumber",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "birthOfDate",
+				"type": "string"
+			},
+			{
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "addCandidate",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "getCandidatePassword",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "getCandidateVotesNumber",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "checkIdAndPassword",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
 	}
 ]
+
+
+
+
 var VoterAbi=[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "voterAddress",
+				"type": "address"
+			}
+		],
+		"name": "getNationalIDArrayLength",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
 	{
 		"constant": false,
 		"inputs": [
@@ -915,36 +1037,6 @@ var VoterAbi=[
 			{
 				"name": "_address",
 				"type": "address"
-			},
-			{
-				"name": "voterIdNumber",
-				"type": "string"
-			},
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "birthOfDate",
-				"type": "string"
-			},
-			{
-				"name": "password",
-				"type": "string"
-			}
-		],
-		"name": "addVoterInfo",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_address",
-				"type": "address"
 			}
 		],
 		"name": "deleteVoterDetail",
@@ -954,38 +1046,37 @@ var VoterAbi=[
 		"type": "function"
 	},
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [
 			{
 				"name": "_address",
 				"type": "address"
-			},
+			}
+		],
+		"name": "getVoterCity",
+		"outputs": [
 			{
-				"name": "nationalID",
-				"type": "string"
-			},
-			{
-				"name": "password",
-				"type": "string"
-			},
-			{
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"name": "birthOfDate",
-				"type": "string"
-			},
-			{
-				"name": "city",
-				"type": "string"
-			},
-			{
-				"name": "year",
+				"name": "",
 				"type": "string"
 			}
 		],
-		"name": "signUpVoter",
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_voterAddress",
+				"type": "address"
+			},
+			{
+				"name": "_candidateAddress",
+				"type": "address"
+			}
+		],
+		"name": "revokeMyVote",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -995,15 +1086,11 @@ var VoterAbi=[
 		"constant": true,
 		"inputs": [
 			{
-				"name": "voterAddress",
-				"type": "address"
-			},
-			{
-				"name": "candidateAddress",
+				"name": "_address",
 				"type": "address"
 			}
 		],
-		"name": "addVoterVotes",
+		"name": "getVoterDateOfBirth",
 		"outputs": [
 			{
 				"name": "",
@@ -1031,44 +1118,6 @@ var VoterAbi=[
 			{
 				"name": "",
 				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "nationalID",
-				"type": "string"
-			}
-		],
-		"name": "checkNationalID",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "voterAddress",
-				"type": "address"
-			}
-		],
-		"name": "getNationalIDArrayLength",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"payable": false,
@@ -1125,7 +1174,7 @@ var VoterAbi=[
 				"type": "address"
 			}
 		],
-		"name": "getVoterCity",
+		"name": "getVoterYear",
 		"outputs": [
 			{
 				"name": "",
@@ -1140,11 +1189,15 @@ var VoterAbi=[
 		"constant": true,
 		"inputs": [
 			{
-				"name": "_address",
+				"name": "voterAddress",
+				"type": "address"
+			},
+			{
+				"name": "candidateAddress",
 				"type": "address"
 			}
 		],
-		"name": "getVoterDateOfBirth",
+		"name": "addVoterVotes",
 		"outputs": [
 			{
 				"name": "",
@@ -1153,6 +1206,24 @@ var VoterAbi=[
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "voterAddress",
+				"type": "address"
+			},
+			{
+				"name": "candidateAddress",
+				"type": "address"
+			}
+		],
+		"name": "grantYourVote",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -1175,22 +1246,114 @@ var VoterAbi=[
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "voterIdNumber",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "birthOfDate",
+				"type": "string"
+			},
+			{
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "addVoterInfo",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{
 				"name": "_address",
 				"type": "address"
+			},
+			{
+				"name": "nationalID",
+				"type": "string"
+			},
+			{
+				"name": "password",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "birthOfDate",
+				"type": "string"
+			},
+			{
+				"name": "city",
+				"type": "string"
+			},
+			{
+				"name": "year",
+				"type": "string"
 			}
 		],
-		"name": "getVoterYear",
+		"name": "checkNationalID",
 		"outputs": [
 			{
 				"name": "",
-				"type": "string"
+				"type": "bool"
 			}
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_address",
+				"type": "address"
+			},
+			{
+				"name": "nationalID",
+				"type": "string"
+			},
+			{
+				"name": "password",
+				"type": "string"
+			},
+			{
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"name": "birthOfDate",
+				"type": "string"
+			},
+			{
+				"name": "city",
+				"type": "string"
+			},
+			{
+				"name": "year",
+				"type": "string"
+			}
+		],
+		"name": "signUpVoter",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ]

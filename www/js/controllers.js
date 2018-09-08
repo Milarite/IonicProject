@@ -250,18 +250,15 @@ $ionicLoading.hide();
   }  
   $scope.validation = function(_idNumber,_pass){
 
-    const candidate_address = web3.
+   
     
-        Web3jsObj.web3Init(contractsInfo.candidate,CandidateAbi,null,null);
+        Web3jsObj.web3Init(contractsInfo.main,MainAbi,null,null);
         var candidateContractInstance = Web3jsObj.Web3SmartContract();
     
         const candidate_address = candidateContractInstance.getCandidateAddressByNationalId.call(_idNumber);
-    
-        alert(candidate_address);
-    
-    
-    
-    
+        const isAccountValid = candidateContractInstance.CandidateCheckIdAndPassword(candidate_address,_pass);
+        return isAccountValid;
+
     }
   $scope.loginEmail = function(loginForm,user,role){
 
@@ -310,9 +307,12 @@ $ionicLoading.hide();
      // console.log(Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010"));
     //   var webobj=Web3jsObj.Web3Facotry("https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010");
     }
-    else  {
+    else if($scope.validation(user.NationalNumber,user.password)==true)  {
 
-        alert($scope.validation(user.NationalNumber));
+        
+        $ionicLoading.hide();
+        $state.go('app.addCandidate');
+        
         
     }
   
