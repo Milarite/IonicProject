@@ -1,4 +1,6 @@
 
+const private_key = "50FBEE34A355F70931B95C5C114AED5FB21BAF14971C1CDCC067BA46024C7275";
+const public_key = "0x63a9adabb3edc39f552249cc0dc23eeab0df3c72";
 var contractsInfo  = {
     main : "0x1d722826dee4c640d7b361594eb70f18cc742036",
     judgment :"0xc095edc14f7e58aa0a49f255359ef1a24fc2f2dd",

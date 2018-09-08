@@ -56,35 +56,19 @@ angular.module('starter.controllers',[])
 
 const judgment_address = localStorage.getItem("address");
 const judgment_privateKey = localStorage.getItem("pkAddress");
-const from_pk = "19F2ED7F3ED053A592E6C7379C7D707D58FC3AECE2C5B07275C27EFA2B33D81A";
-const from_puk = "0x9c5209811618f6c0622b4aad5b109603a452bc0a";
 
 
 
-Web3jsObj.web3Init(contractsInfo.main,MainAbi,from_puk,from_pk);
+
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
 Web3jsObj.Web3Facotry(rinkebyUrl);
 
-const smartContract = Web3jsObj.Web3SmartContract();
 
 
 
 
 
- web3.eth.getTransactionCount(from_puk,function(err,transactionCount){
 
-             var tx =new ethereumjs.Tx({ 
-            data : '',
-            nonce : transactionCount,
-            gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
-            to : judgment_address,
-            value : 6000000000000000000,
-            gasLimit: 1000000
-            
-
-        });
-
-          tx.sign(ethereumjs.Buffer.Buffer.from(from_pk, 'hex'));
-          var raw = '0x' + tx.serialize().toString('hex');
 
 
         //  web3.eth.sendRawTransaction(raw, function (err, transactionHash) {
@@ -179,7 +163,7 @@ $ionicLoading.hide();
         //})
 
 
-    })
+ //   })
     
     
     
@@ -214,7 +198,51 @@ $ionicLoading.hide();
 
 .controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj','$ionicLoading' ,function($scope,Web3jsObj,$window,$state,Web3jsObj,$ionicLoading) {
 
+    $scope.addEtherToJudgment = function(_from,_fromPk,_to){
+        Web3jsObj.Web3Facotry(rinkebyUrl);
+        var balance = web3.eth.getBalance(_to);
+        balance = web3.toDecimal(balance);
+        balance = web3.fromWei(balance, 'ether');
+      
+        if(balance > 1)
+       { 
+        web3.eth.getTransactionCount(_from,function(err,transactionCount){
 
+            var tx =new ethereumjs.Tx({ 
+           data : '',
+           nonce : transactionCount,
+           gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
+           to : _to,
+           value : 6000000000000000000,
+           gasLimit: 1000000
+           
+
+       });
+
+         tx.sign(ethereumjs.Buffer.Buffer.from(_fromPk, 'hex'));
+         var raw = '0x' + tx.serialize().toString('hex');
+         web3.eth.sendRawTransaction(raw, function(err,result){
+            $ionicLoading.hide();
+            
+            if(!err){
+                console.log("transactionHash");
+                console.log(result);
+                 $state.go('app.addCandidate');
+
+           
+            }
+
+         });
+        
+         
+    })
+  
+    }
+    else{
+        $ionicLoading.hide();
+        $state.go('app.addCandidate');
+    }
+}
   $scope.check = function(event,_val){
     if ($scope.checked == event.target.value)
      $scope.checked = false;
@@ -252,13 +280,22 @@ $scope.validation = function(_idNumber,_pass){
             
         localStorage.setItem("address", _wallet.address);
         localStorage.setItem("pkAddress",_wallet.privateKey);
+        
+
+        $scope.addEtherToJudgment(public_key,private_key,_wallet.address);
+
+
+
+        /// add ether to judg if his wallet is empty 
+
+
+
+        // end of adding ether to judg
 
 
 
     
-            $state.go('app.addCandidate');
-
-            $ionicLoading.hide();
+           
 
             
         });
