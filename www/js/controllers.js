@@ -56,12 +56,28 @@ angular.module('starter.controllers',[])
 
 const judgment_address = localStorage.getItem("address");
 const judgment_privateKey = localStorage.getItem("pkAddress");
-
-
-
-
 Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
 Web3jsObj.Web3Facotry(rinkebyUrl);
+const smartContract = Web3jsObj.Web3SmartContract();
+
+$scope.nationlIdValidation = function(_id)
+{
+
+  $scope.userFound=false;
+  let user =smartContract.getCandidateAddressByNationalId.call(_id);
+
+  if(user != no_address){
+
+    $scope.userFound = true;
+  }
+
+  
+
+}
+
+
+
+
 
 
 
@@ -93,7 +109,7 @@ Web3jsObj.Web3Facotry(rinkebyUrl);
  
     
 
-const smartContract = Web3jsObj.Web3SmartContract();
+
 
 
 

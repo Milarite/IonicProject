@@ -7,7 +7,9 @@ var contractsInfo  = {
     voters :"0xa1fd853a254eb62eee0cf56febe2eb29806a1876",
     candidate:"0x69336d5f32cf4d92eed2c7860d530f12f1eba197"
     
-    }
+	}
+	
+const no_address = "0x0000000000000000000000000000000000000000";
     
 const rinkebyUrl = "https://rinkeby.infura.io/v3/afbac1a223484d84a7784a133d1f2010";
 
