@@ -56,12 +56,28 @@ angular.module('starter.controllers',[])
 
 const judgment_address = localStorage.getItem("address");
 const judgment_privateKey = localStorage.getItem("pkAddress");
-
-
-
-
 Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
 Web3jsObj.Web3Facotry(rinkebyUrl);
+const smartContract = Web3jsObj.Web3SmartContract();
+
+$scope.nationlIdValidation = function(_id)
+{
+
+  $scope.userFound=false;
+  let user =smartContract.getCandidateAddressByNationalId.call(_id);
+
+  if(user != no_address){
+
+    $scope.userFound = true;
+  }
+
+  
+
+}
+
+
+
+
 
 
 
@@ -93,7 +109,7 @@ Web3jsObj.Web3Facotry(rinkebyUrl);
  
     
 
-const smartContract = Web3jsObj.Web3SmartContract();
+
 
 
 
@@ -213,7 +229,7 @@ $ionicLoading.hide();
            nonce : transactionCount,
            gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
            to : _to,
-           value : 6000000000000000000,
+           value : 2000000000000000000 ,
            gasLimit: 1000000
            
 
@@ -258,7 +274,16 @@ $ionicLoading.hide();
         const candidate_address = candidateContractInstance.getCandidateAddressByNationalId.call(_idNumber);
         // this line will call function thats accept address and password as parameter and return true or false based on founded 
         const isAccountValid = candidateContractInstance.CandidateCheckIdAndPassword(candidate_address,_pass);
+     if(isAccountValid==true){
+       localStorage.setItem("candidate_nationalId",_idNumber);
+     }
+
+
+
+
         return isAccountValid;
+
+        
 
     }
   $scope.loginEmail = function(loginForm,user,role){
@@ -281,6 +306,7 @@ $ionicLoading.hide();
 
     
     Web3jsObj.createBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
+
 
             
         localStorage.setItem("address", _wallet.address);
@@ -312,11 +338,12 @@ $ionicLoading.hide();
 
         
         $ionicLoading.hide();
-        $state.go('app.addCandidate');
+        $state.go('app.CandidateProfile');
+      
         
         
     }
-  
+  else alert ("invalid password");
   }
 
 
@@ -329,6 +356,7 @@ $ionicLoading.hide();
 
 .controller('ViewCandidateCtrl',function($scope,Web3jsObj){
 
+  
 //     Web3jsObj.web3Init(dsdsd,adsadsd);
 //     Web3jsObj.Web3Facotry();
 //   var s =  Web3jsObj.Web3SmartContract();
@@ -355,7 +383,7 @@ for(var i =0 ; i < number ;i++)
   var city = smartInstance.getCandidateCity.call(address);
   var numberOfVotes = smartInstance.getCandidateVotesNumber.call(address);
 
-  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes , address:address };
+  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes  };
 
   items.push(candidate);
   //var 
@@ -385,6 +413,53 @@ $scope.candidates = items;
     
     
 
-});
+})
+.controller('CandidateProfileCtrl',function($scope,Web3jsObj,$rootScope){
+  
+
+  const judgment_address = localStorage.getItem("address");
+  const judgment_privateKey = localStorage.getItem("pkAddress");
+
+Web3jsObj.web3Init(contractsInfo.main,MainAbi,judgment_address,judgment_privateKey);
+Web3jsObj.Web3Facotry(rinkebyUrl);
+smartInstance=Web3jsObj.Web3SmartContract();
+
+const _idNumber = localStorage.getItem("candidate_nationalId");
+
+const candidate_address = smartInstance.getCandidateAddressByNationalId.call(_idNumber);
+// this line will call function thats accept address and password as parameter and return true or false based on founded 
+const birthOfDate = smartInstance.getCandidatebirthOfDate.call(candidate_address);
+const city = smartInstance.getCandidateCity.call(candidate_address);
+const year = smartInstance.getCandidateYear.call(candidate_address);
+const NumberOfVotes=smartInstance.getCandidateVotesNumber.call(candidate_address);
+const nameCandidate=smartInstance.getCandidateName.call(candidate_address);
+const campaign=smartInstance.getCandidateCampaign.call(candidate_address);
+
+
+$scope.candidateProfile = {
+  NationalNumber : _idNumber,
+  Address : candidate_address,
+  BirthOfDate : birthOfDate,
+  City:city,
+  Year:year,
+  NumberOfVotes:NumberOfVotes,
+  nameCandidate:nameCandidate,
+  campaign:campaign
+  
+  
+  };
+
+
+
+
+//const candidate_address = smartInstance.getCandidateAddressByNationalId.call();
+
+  //const numberOfVotes=smartInstance.getCandidateVotesNumber.call(candidate_address);
+
+  //console.log(numberOfVotes);
+
+})
+
+;
 
 

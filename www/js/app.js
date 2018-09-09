@@ -92,7 +92,15 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
       } 
     }
   })
-  
+  .state('app.CandidateProfile', {
+    url: '/CandidateProfile',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/CandidateProfile.html',
+        controller: 'CandidateProfileCtrl'
+      }
+    }
+  })
  
   
   
