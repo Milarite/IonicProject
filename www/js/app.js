@@ -89,7 +89,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services'])
       'menuContent': {
         templateUrl: 'templates/ViewCandidate.html',
         controller: 'ViewCandidateCtrl'
-      }
+      } 
     }
   })
   
