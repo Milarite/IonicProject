@@ -1,9 +1,25 @@
 <ion-view view-title="Welcome {{candidateProfile.nameCandidate}}">
   
   <ion-content  class="container container-custom">
-      <h2>{{candidateProfile.nameCandidate}}</h2>
-    <div class="center-content">
+      
+      <div class="profile-nav  animated bounceInRight">
+          <div class="panel">
+            <div class="user-heading round">
       <img style='width:200px; height:100px;'  src='/img/Candidate.jpg'>
+         <br><br>
+     
+        <h4>Candidate Name : {{ candidateProfile.nameCandidate}}</h4>
+        <h4>NationalNumber: {{candidateProfile.NationalNumber}}</h4>
+        <h4>Birth Of Date: {{candidateProfile.BirthOfDate}}</h4>
+        <h4>City: {{candidateProfile.City}}</h4>
+        <h4>Year: {{candidateProfile.Year}}</h4>
+        <h4>Number Of Votes: {{candidateProfile.NumberOfVotes}}</h4>
+        <h4>campaign: {{candidateProfile.campaign}}</h4>
+
+
+</div>
+</div>
+</div>
    </form>
   </ion-content>
 </ion-view>

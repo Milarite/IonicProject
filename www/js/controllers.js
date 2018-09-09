@@ -291,7 +291,7 @@ $ionicLoading.hide();
     
     Web3jsObj.createBrainWallet(user.NationalNumber, user.password).then(function(_wallet){
 
-      
+
             
         localStorage.setItem("address", _wallet.address);
         localStorage.setItem("pkAddress",_wallet.privateKey);
@@ -417,6 +417,7 @@ const city = smartInstance.getCandidateCity.call(candidate_address);
 const year = smartInstance.getCandidateYear.call(candidate_address);
 const NumberOfVotes=smartInstance.getCandidateVotesNumber.call(candidate_address);
 const nameCandidate=smartInstance.getCandidateName.call(candidate_address);
+const campaign=smartInstance.getCandidateCampaign.call(candidate_address);
 
 
 $scope.candidateProfile = {
@@ -426,7 +427,8 @@ $scope.candidateProfile = {
   City:city,
   Year:year,
   NumberOfVotes:NumberOfVotes,
-  nameCandidate:nameCandidate
+  nameCandidate:nameCandidate,
+  campaign:campaign
   
   
   };

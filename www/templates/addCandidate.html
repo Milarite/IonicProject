@@ -66,6 +66,14 @@
                 
 
               </label>
+              <label class="item item-input" >
+                  <span class="input-label">campaign</span>
+                  <input name="campaign" type="text"  ng-model="candidateData.campaign" required>
+                  <span class="form-error" ng-show="addForm.campaign.$touched && addForm.campaign.$invalid">this field is required</span>
+                  
+
+
+              </label>
               <label class="item">
                 <button ng-click="addCandidate(candidateData)" ng-disabled="addForm.$invalid || addForm.$pending" class="button button-block button-positive" type="submit">Add Candidate</button>
               </label>
