@@ -13,7 +13,7 @@ angular.module('starter.controllers',[])
   // Form data for the login modal
   $scope.loginData = {};
 
-  // Create the login modal that we will use later
+  // Create the login modal that we will use laterginlz
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
   }).then(function(modal) {
@@ -254,8 +254,9 @@ $ionicLoading.hide();
     
         Web3jsObj.web3Init(contractsInfo.main,MainAbi,null,null);
         var candidateContractInstance = Web3jsObj.Web3SmartContract();
-    
+    // this line will get the address from smart contract by candidate national id
         const candidate_address = candidateContractInstance.getCandidateAddressByNationalId.call(_idNumber);
+        // this line will call function thats accept address and password as parameter and return true or false based on founded 
         const isAccountValid = candidateContractInstance.CandidateCheckIdAndPassword(candidate_address,_pass);
         return isAccountValid;
 
