@@ -5,6 +5,16 @@ app.service("Web3services",function(){
     }
 });
 
+// app.service("userRole",function(){
+//     this.getCurrentRole=function(_role){
+//         if(_role == 1){
+//             return "candidate";
+//         }
+//         if(_role == 2){
+//             return "judgment";
+//         }
+//     }
+// })
 
 app.service("Web3jsObj",function(){
 

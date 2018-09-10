@@ -19,13 +19,13 @@
     <ion-content>
       <ion-list>
        
-        <ion-item menu-close href="#/app/addCandidate">
-            Add Candidate
+        <ion-item  ng-if ="Donthide"  menu-close href="#/app/addCandidate">
+                     Add Candidate
         </ion-item>
         <ion-item menu-close href="#/app/search">
           Search
         </ion-item>
-        <ion-item menu-close href="#/app/ViewCandidate">
+        <ion-item ng-if ="Donthide" menu-close href="#/app/ViewCandidate">
          View Candidate
         </ion-item>
         <ion-item <ion-item menu-close href="#/app/CandidateProfile">
