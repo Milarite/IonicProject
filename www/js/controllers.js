@@ -41,6 +41,10 @@ angular.module('starter.controllers',[])
     }, 1000);
   };
   $scope.logout=function(){
+
+    localStorage.removeItem("candidate_nationalId" );
+    localStorage.removeItem("pkAddress" );
+    localStorage.removeItem("address" );
    $state.go('app.login2');
 
   }
@@ -213,6 +217,33 @@ $ionicLoading.hide();
 
 
 .controller('login2Ctrl',["$scope","Web3jsObj",'$window','$state','Web3jsObj','$ionicLoading' ,function($scope,Web3jsObj,$window,$state,Web3jsObj,$ionicLoading) {
+const current_value_candidate = localStorage.getItem("candidate_nationalId");
+const current_value_judgment = localStorage.getItem("address");
+
+if(current_value_judgment !=undefined || current_value_candidate != undefined){
+
+  if(current_value_judgment != undefined){
+
+    $state.go("app.addCandidate");
+
+  }
+  else{
+    $state.go("app.CandidateProfile");
+
+
+  }
+
+
+  return ;
+
+
+
+
+ 
+}
+
+ 
+  
     Web3jsObj.Web3Facotry(rinkebyUrl);
     $scope.addEtherToJudgment = function(_from,_fromPk,_to){
         
