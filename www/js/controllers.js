@@ -229,7 +229,7 @@ $ionicLoading.hide();
            nonce : transactionCount,
            gasPrice :web3.toHex(web3.toWei('20', 'gwei')),
            to : _to,
-           value : 6000000000000000000,
+           value : 2000000000000000000 ,
            gasLimit: 1000000
            
 
@@ -383,7 +383,7 @@ for(var i =0 ; i < number ;i++)
   var city = smartInstance.getCandidateCity.call(address);
   var numberOfVotes = smartInstance.getCandidateVotesNumber.call(address);
 
-  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes , address:address };
+  var candidate = {nameCandidate : name , City :city, NumberOfVotes : numberOfVotes  };
 
   items.push(candidate);
   //var 
