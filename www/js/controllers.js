@@ -10,6 +10,17 @@ angular.module('starter.controllers',[])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+//check if candidate 
+
+const candidateAdress=localStorage.getItem("candidate_nationalId");
+$scope.Donthide= true;
+if(candidateAdress)
+ {
+   $scope.Donthide=false;
+ }
+  console.log($scope.Donthide);
+
+
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -289,13 +300,13 @@ $ionicLoading.hide();
   $scope.loginEmail = function(loginForm,user,role){
 
 
-
+//  $rootScope.currentRole = role;
 
 
 // (role.candidate ==true && valdation(user.NationalNumber,user.password))
 
 
-// if(($scope.role=="candidate" && validation(user.NationalNumber,user.password)==true))
+// if(($scope.role=="c" && validation(user.NationalNumber,user.password)==true))
 // {
 
 // }
