@@ -126,7 +126,7 @@ $scope.nationlIdValidation = function(_id)
                ///// add candidate function
 
                var data =smartContract.addCandidate.getData(_wallet.address,candidateData.candidateId,candidateData.name,candidateData.dateOfBirth,candidateData.password
-                ,candidateData.city,candidateData.year,candidateData.phoneNumber,"plz plz endome elena drobs mlabs swf n7rr el ods"); 
+                ,candidateData.city,candidateData.year,candidateData.phoneNumber,candidateData.campaign); 
             
             
                 web3.eth.getTransactionCount(judgment_address,function(err,nonce){
